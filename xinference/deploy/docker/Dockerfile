@@ -128,7 +128,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     NO_WEB_UI=1 uv pip install --system --index-url "$PIP_INDEX" \
       --extra-index-url "$TORCH_INDEX" --index-strategy unsafe-best-match \
       --constraint /opt/requirements-runtime.txt \
-      ".[otel]" transformers accelerate
+      ".[otel,embedding,rerank]" transformers accelerate
 
 COPY . /opt/inference
 COPY --from=web-builder /opt/inference/xinference/ui/web/dist /opt/inference/xinference/ui/web/dist
