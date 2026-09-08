@@ -118,6 +118,9 @@ WORKDIR /opt/inference
 # dependencies again.
 COPY pyproject.toml build_backend.py build_web.py ./
 COPY xinference/__init__.py ./xinference/
+# build_backend.py validates built-in model specs during `uv pip install .[otel]`,
+# so the json sidecar must be present in the minimal skeleton COPY above.
+COPY xinference/model/llm/llm_family.json ./xinference/model/llm/llm_family.json
 RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=cache,target=/root/.cache/uv \
     touch README.md && \
